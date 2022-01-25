@@ -31,7 +31,8 @@ class RequestGarage {
     await fetch("http://127.0.0.1:3000/garage")
       .then((resp) => resp.json())
       .then((data: CarType[]) => {
-        new Navigation().addGaragePage(data);
+        document.body.innerHTML = "";
+        new Navigation().renderPage(data);
         new ControlGaragePage(data);
       });
   }

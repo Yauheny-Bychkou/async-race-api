@@ -8,10 +8,11 @@ class TitlePageGarage {
     return this.titleGarage;
   }
   addTitlePage() {
+    const countPage = JSON.parse(localStorage.getItem("countPage") || "1");
     this.titlePage.style.color = "#fff";
     this.titlePage.textContent = `Page #`;
     this.spanNumberPage.classList.add("span-number-page");
-    this.spanNumberPage.innerText = "1";
+    this.spanNumberPage.innerText = countPage;
     this.titlePage.append(this.spanNumberPage);
     return this.titlePage;
   }

@@ -27,19 +27,23 @@ class Navigation {
     this.wrapperForButtons.append(this.garageButton, this.winnersButton);
     document.body.prepend(this.wrapperForButtons);
   }
-  addGaragePage(data: CarType[], minCar = 0, maxCar = 7) {
+  addGaragePage(data: CarType[]) {
+    const minCar = JSON.parse(localStorage.getItem("minCar") || "0");
+    const maxCar = JSON.parse(localStorage.getItem("maxCar") || "7");
     this.wrapperForPage.classList.add("wrapper-for-page");
     document.body.style.paddingLeft = "10px";
-    this.wrapperForPage.append(new GaragePage().renderPage(data, minCar, maxCar));
+    this.wrapperForPage.append(new GaragePage().renderPage(data, +minCar, +maxCar));
     document.body.append(this.wrapperForPage);
   }
-  addListenersToGarageButton(minCar = 0, maxCar = 7) {
+  addListenersToGarageButton() {
+    const minCar = JSON.parse(localStorage.getItem("minCar") || "0");
+    const maxCar = JSON.parse(localStorage.getItem("maxCar") || "7");
     this.garageButton.addEventListener("click", () => {
       fetch("http://127.0.0.1:3000/garage")
         .then((resp) => resp.json())
         .then((data) => {
           this.wrapperForPage.lastChild?.remove();
-          this.wrapperForPage.append(new GaragePage().renderPage(data, minCar, maxCar));
+          this.wrapperForPage.append(new GaragePage().renderPage(data, +minCar, +maxCar));
           new ControlGaragePage(data);
         });
     });

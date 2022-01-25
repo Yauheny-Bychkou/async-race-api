@@ -46,6 +46,7 @@ class TableWinners {
     return this.wrapperBodyTable;
   }
   addRowTable(item: WinnerType) {
+    console.log(item);
     fetch(`http://127.0.0.1:3000/garage/${item.id}`)
       .then((resp) => resp.json())
       .then((data: CarType) => {

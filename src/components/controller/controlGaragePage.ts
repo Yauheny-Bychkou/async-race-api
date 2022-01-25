@@ -134,11 +134,14 @@ class ControlGaragePage {
           this.buttonNext.removeAttribute("disabled");
         }
         this.spanNumberPage.innerHTML = this.count.toString();
+        localStorage.setItem("countPage", JSON.stringify(this.count.toString()));
         this.wrapperCars.innerHTML = "";
         data
           .slice(this.minCar, this.maxCar)
           .forEach((item: CarType) => this.wrapperCars.append(new Car().addCar(item)));
         this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
+        localStorage.setItem("minCar", JSON.stringify(this.minCar));
+        localStorage.setItem("maxCar", JSON.stringify(this.maxCar));
       } else if (isButtonNext) {
         this.minCar = this.minCar + MAX_NUMBER_CAR;
         this.maxCar = this.maxCar + MAX_NUMBER_CAR;
@@ -150,11 +153,14 @@ class ControlGaragePage {
           this.buttonNext.setAttribute("disabled", "");
         }
         this.spanNumberPage.innerHTML = this.count.toString();
+        localStorage.setItem("countPage", JSON.stringify(this.count.toString()));
         this.wrapperCars.innerHTML = "";
         data
           .slice(this.minCar, this.maxCar)
           .forEach((item: CarType) => this.wrapperCars.append(new Car().addCar(item)));
         this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
+        localStorage.setItem("minCar", JSON.stringify(this.minCar));
+        localStorage.setItem("maxCar", JSON.stringify(this.maxCar));
       }
     });
   }

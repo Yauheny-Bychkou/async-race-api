@@ -11,6 +11,7 @@ const START_COUNT = 1;
 const MIN_COUNT_FOR_DISABLED = 2;
 
 class ControlGaragePage {
+  private inputName: HTMLInputElement = document.querySelector(".name-create")!;
   private buttonRace: HTMLInputElement = document.querySelector(".race")!;
   private buttonReset: HTMLInputElement = document.querySelector(".reset")!;
   private inputNameCreate: HTMLInputElement = document.querySelector(".name-create")!;
@@ -27,9 +28,14 @@ class ControlGaragePage {
   private buttonPrev = document.querySelector(".prev")!;
   private buttonNext = document.querySelector(".next")!;
   private spanNumberPage = document.querySelector(".span-number-page")!;
-  private count = START_COUNT;
-  private minCar = MIN_NUMBER_CAR;
-  private maxCar = MAX_NUMBER_CAR;
+  // private count = START_COUNT;
+  // private minCar = MIN_NUMBER_CAR;
+  // private maxCar = MAX_NUMBER_CAR;
+  private count = localStorage.getItem("countPage")
+    ? JSON.parse(localStorage.getItem("countPage") || "1")
+    : START_COUNT;
+  private minCar = localStorage.getItem("minCar") ? JSON.parse(localStorage.getItem("minCar") || "0") : MIN_NUMBER_CAR;
+  private maxCar = localStorage.getItem("maxCar") ? JSON.parse(localStorage.getItem("maxCar") || "7") : MAX_NUMBER_CAR;
   requestGarage: RequestGarage;
   requestEngine: RequestEngine;
   constructor(data: CarType[]) {
@@ -40,6 +46,18 @@ class ControlGaragePage {
     this.addEventListenerForButtonGenerate();
     this.addEventListenerForButtonsPagination(data);
     this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
+    this.addEventListenerForInputNameCreate();
+    this.addEventListenerForInputColorCreate();
+  }
+  addEventListenerForInputColorCreate() {
+    this.inputColorCreate.addEventListener("change", () => {
+      localStorage.setItem("inputColorCreate", JSON.stringify(this.inputColorCreate.value));
+    });
+  }
+  addEventListenerForInputNameCreate() {
+    this.inputName.addEventListener("blur", () => {
+      localStorage.setItem("inputNameCreate", JSON.stringify(this.inputName.value));
+    });
   }
   addEventListenerForButtonRace(data: CarType[], minCar: number, maxCar: number) {
     this.buttonRace.addEventListener("click", () => {
@@ -124,43 +142,44 @@ class ControlGaragePage {
       const isButtonPrev = (<HTMLElement>event.target).classList.contains("prev");
       const isButtonNext = (<HTMLElement>event.target).classList.contains("next");
       if (isButtonPrev) {
-        this.minCar = this.minCar - MAX_NUMBER_CAR;
-        this.maxCar = this.maxCar - MAX_NUMBER_CAR;
-        this.count = this.count - START_COUNT;
+        this.minCar = +this.minCar - MAX_NUMBER_CAR;
+        this.maxCar = +this.maxCar - MAX_NUMBER_CAR;
+        this.count = +this.count - START_COUNT;
         if (this.count < MIN_COUNT_FOR_DISABLED) {
           this.buttonPrev.setAttribute("disabled", "");
         }
-        if (Math.ceil(data.length / MAX_NUMBER_CAR) > this.count) {
+        if (Math.ceil(data.length / MAX_NUMBER_CAR) > +this.count) {
           this.buttonNext.removeAttribute("disabled");
         }
         this.spanNumberPage.innerHTML = this.count.toString();
         localStorage.setItem("countPage", JSON.stringify(this.count.toString()));
         this.wrapperCars.innerHTML = "";
         data
-          .slice(this.minCar, this.maxCar)
+          .slice(+this.minCar, +this.maxCar)
           .forEach((item: CarType) => this.wrapperCars.append(new Car().addCar(item)));
-        this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
-        localStorage.setItem("minCar", JSON.stringify(this.minCar));
-        localStorage.setItem("maxCar", JSON.stringify(this.maxCar));
+        this.addEventListenerForButtonRace(data, +this.minCar, +this.maxCar);
+        localStorage.setItem("minCar", JSON.stringify(+this.minCar));
+        localStorage.setItem("maxCar", JSON.stringify(+this.maxCar));
       } else if (isButtonNext) {
-        this.minCar = this.minCar + MAX_NUMBER_CAR;
-        this.maxCar = this.maxCar + MAX_NUMBER_CAR;
-        this.count = this.count + START_COUNT;
-        if (this.count > START_COUNT) {
+        this.minCar = +this.minCar + MAX_NUMBER_CAR;
+        this.maxCar = +this.maxCar + MAX_NUMBER_CAR;
+        this.count = +this.count + START_COUNT;
+
+        if (+this.count > START_COUNT) {
           this.buttonPrev.removeAttribute("disabled");
         }
-        if (Math.ceil(data.length / MAX_NUMBER_CAR) === this.count) {
+        if (Math.ceil(data.length / MAX_NUMBER_CAR) === +this.count) {
           this.buttonNext.setAttribute("disabled", "");
         }
         this.spanNumberPage.innerHTML = this.count.toString();
         localStorage.setItem("countPage", JSON.stringify(this.count.toString()));
         this.wrapperCars.innerHTML = "";
         data
-          .slice(this.minCar, this.maxCar)
+          .slice(+this.minCar, +this.maxCar)
           .forEach((item: CarType) => this.wrapperCars.append(new Car().addCar(item)));
-        this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
-        localStorage.setItem("minCar", JSON.stringify(this.minCar));
-        localStorage.setItem("maxCar", JSON.stringify(this.maxCar));
+        this.addEventListenerForButtonRace(data, +this.minCar, +this.maxCar);
+        localStorage.setItem("minCar", JSON.stringify(+this.minCar));
+        localStorage.setItem("maxCar", JSON.stringify(+this.maxCar));
       }
     });
   }

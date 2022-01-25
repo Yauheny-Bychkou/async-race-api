@@ -12,14 +12,21 @@ class ControlPanel {
   private buttonReset = document.createElement("button");
   private buttonGenerateCars = document.createElement("button");
   addControlFieldCreate() {
+    const inputName = localStorage.getItem("inputNameCreate")
+      ? JSON.parse(localStorage.getItem("inputNameCreate") || "")
+      : "";
+    const inputColor = localStorage.getItem("inputColorCreate")
+      ? JSON.parse(localStorage.getItem("inputColorCreate") || "#ffffff")
+      : "#ffffff";
+    // inputColorCreate
     this.buttonActionCreate.classList.add("create");
     this.buttonActionCreate.textContent = `CREATE`;
     this.inputForColorCarCreate.setAttribute("type", "color");
     this.inputForColorCarCreate.classList.add("color-create");
-    this.inputForColorCarCreate.setAttribute("value", "#ffffff");
+    this.inputForColorCarCreate.setAttribute("value", inputColor);
     this.inputForNameCarCreate.setAttribute("type", "text");
     this.inputForNameCarCreate.classList.add("name-create");
-    this.inputForNameCarCreate.setAttribute("value", "");
+    this.inputForNameCarCreate.setAttribute("value", inputName);
     this.wrapperForFieldCreate.style.paddingBottom = "10px";
     this.wrapperForFieldCreate.classList.add("flex");
     this.wrapperForFieldCreate.append(this.inputForNameCarCreate, this.inputForColorCarCreate, this.buttonActionCreate);

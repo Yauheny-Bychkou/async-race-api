@@ -28,16 +28,16 @@ class Navigation {
     document.body.prepend(this.wrapperForButtons);
   }
   addGaragePage(data: CarType[]) {
-    const minCar = JSON.parse(localStorage.getItem("minCar") || "0");
-    const maxCar = JSON.parse(localStorage.getItem("maxCar") || "7");
+    const minCar = localStorage.getItem("minCar") ? JSON.parse(localStorage.getItem("minCar") || "0") : "0";
+    const maxCar = localStorage.getItem("maxCar") ? JSON.parse(localStorage.getItem("maxCar") || "7") : "7";
     this.wrapperForPage.classList.add("wrapper-for-page");
     document.body.style.paddingLeft = "10px";
     this.wrapperForPage.append(new GaragePage().renderPage(data, +minCar, +maxCar));
     document.body.append(this.wrapperForPage);
   }
   addListenersToGarageButton() {
-    const minCar = JSON.parse(localStorage.getItem("minCar") || "0");
-    const maxCar = JSON.parse(localStorage.getItem("maxCar") || "7");
+    const minCar = localStorage.getItem("minCar") ? JSON.parse(localStorage.getItem("minCar") || "0") : "0";
+    const maxCar = localStorage.getItem("maxCar") ? JSON.parse(localStorage.getItem("maxCar") || "7") : "7";
     this.garageButton.addEventListener("click", () => {
       fetch("http://127.0.0.1:3000/garage")
         .then((resp) => resp.json())

@@ -2,7 +2,12 @@ class ButtonPagination {
   private buttonPrev = document.createElement("button");
   private buttonNext = document.createElement("button");
   addButtonPrev() {
-    this.buttonPrev.setAttribute("disabled", "");
+    const minCar = localStorage.getItem("minCar") ? JSON.parse(localStorage.getItem("minCar") || "0") : "0";
+    if (minCar > 6) {
+      this.buttonPrev.removeAttribute("disabled");
+    } else if (minCar < 7) {
+      this.buttonPrev.setAttribute("disabled", "");
+    }
     this.buttonPrev.innerText = "PREV";
     this.buttonPrev.style.marginRight = "10px";
     this.buttonPrev.classList.add("button", "prev");

@@ -8,7 +8,7 @@ class TitlePageGarage {
     return this.titleGarage;
   }
   addTitlePage() {
-    const countPage = JSON.parse(localStorage.getItem("countPage") || "1");
+    const countPage = localStorage.getItem("countPage") ? JSON.parse(localStorage.getItem("countPage") || "1") : "1";
     this.titlePage.style.color = "#fff";
     this.titlePage.textContent = `Page #`;
     this.spanNumberPage.classList.add("span-number-page");

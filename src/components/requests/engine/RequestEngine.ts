@@ -20,8 +20,10 @@ class RequestGarage {
       if (resp.status === 500) {
         new CarAnimation().stopAnimationCar(id);
       } else {
-        console.log(id);
-        // document.body.append(new MessageWinner().addWrapperMessage(id, Math.floor(distance / velocity / 1000)));
+        document.body.append(new MessageWinner().addWrapperMessage(id, Math.floor(distance / velocity / 1000)));
+        if (document.querySelectorAll(".message")[0] !== undefined) {
+          document.querySelectorAll(".message")[0].classList.add("message-visible");
+        }
       }
     });
   }

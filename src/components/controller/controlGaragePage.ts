@@ -43,7 +43,7 @@ class ControlGaragePage {
   }
   addEventListenerForButtonRace(data: CarType[], minCar: number, maxCar: number) {
     this.buttonRace.addEventListener("click", () => {
-      data.slice(minCar, maxCar).forEach((item: CarType) => {
+      data.slice(minCar, maxCar).forEach((item: CarType, i) => {
         new RequestEngine().startEngine(item.id.toString());
         const buttonStart = document.querySelector(`.started-${item.id}`);
         const buttonStop = document.querySelector(`.stopped-${item.id}`);
@@ -55,6 +55,9 @@ class ControlGaragePage {
   }
   addEventListenerForButtonReset(data: CarType[], minCar: number, maxCar: number) {
     this.buttonReset.addEventListener("click", () => {
+      document.querySelectorAll(".message").forEach((item) => {
+        item.remove();
+      });
       data.slice(minCar, maxCar).forEach((item: CarType) => {
         new CarAnimation().returnToStartPosition(item.id.toString());
         const buttonStart = document.querySelector(`.started-${item.id}`);

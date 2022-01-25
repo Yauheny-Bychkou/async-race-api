@@ -50,9 +50,15 @@ body {
     justify-content: space-between;
 }
 .message{
+    display: none;
     position: absolute;
     left: 50%;
     top: 50%;
     color: #fff;
     transform: translate(-50%, -50%);
+    color: #d82e2e;
+    text-shadow: 0 -1px 4px #000, 0 -2px 10px #ff0, 0 -10px 20px #715232, 0 18px 40px #8d3c3c;
+}
+.message-visible {
+   display: initial !important; 
 }

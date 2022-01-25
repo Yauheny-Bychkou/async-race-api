@@ -9,6 +9,7 @@ class Navigation {
   private garageButton: HTMLButtonElement = document.createElement("button");
   private wrapperForButtons: HTMLDivElement = document.createElement("div");
   private wrapperForPage: HTMLDivElement = document.createElement("div");
+
   renderPage(data: CarType[]) {
     this.wrapperForPage.classList.add("wrapper-for-page");
     this.addButtons();

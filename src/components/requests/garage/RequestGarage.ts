@@ -4,14 +4,13 @@ import { CarType } from "../../types/car";
 
 class RequestGarage {
   async createCar(name: string, color: string) {
-    fetch("http://127.0.0.1:3000/garage").then(() => this.getCars());
     await fetch("http://127.0.0.1:3000/garage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name: name, color: color }),
-    });
+    }).then(() => this.getCars());
   }
   async updateCar(id: string, name: string, color: string) {
     await fetch(`http://127.0.0.1:3000/garage/${id}`, {

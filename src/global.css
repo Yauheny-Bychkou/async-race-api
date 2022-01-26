@@ -49,6 +49,10 @@ body {
     width: 450px;
     justify-content: space-between;
 }
+.row-table{
+    display: flex;
+    align-items: center;
+}
 .message{
     display: none;
     position: absolute;

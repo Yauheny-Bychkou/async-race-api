@@ -61,6 +61,7 @@ class ControlGaragePage {
   }
   addEventListenerForButtonRace(data: CarType[], minCar: number, maxCar: number) {
     this.buttonRace.addEventListener("click", () => {
+      localStorage.setItem("idCar", "0");
       data.slice(minCar, maxCar).forEach((item: CarType, i) => {
         new RequestEngine().startEngine(item.id.toString());
         const buttonStart = document.querySelector(`.started-${item.id}`);
@@ -73,6 +74,7 @@ class ControlGaragePage {
   }
   addEventListenerForButtonReset(data: CarType[], minCar: number, maxCar: number) {
     this.buttonReset.addEventListener("click", () => {
+      localStorage.setItem("idCar", "0");
       document.querySelectorAll(".message").forEach((item) => {
         item.remove();
       });

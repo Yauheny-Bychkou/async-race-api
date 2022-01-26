@@ -21,16 +21,16 @@ class RequestGarage {
       if (resp.status === 500) {
         new CarAnimation().stopAnimationCar(id);
       } else {
-        document.body.append(new MessageWinner().addWrapperMessage(id, Math.floor(distance / velocity / 1000)));
         let idCar = localStorage.getItem("idCar") ? JSON.parse(localStorage.getItem("idCar") || "") : 0;
-        if (idCar === 1) {
-          new RequestWinners().createWinner(+id, Math.floor(distance / velocity / 1000));
+        if (idCar === 0) {
+          document.body.append(new MessageWinner().addWrapperMessage(id, Math.floor(distance / velocity / 1000)));
+          new RequestWinners().getWinner(+id, Math.floor(distance / velocity / 1000));
         }
         idCar++;
         localStorage.setItem("idCar", JSON.stringify(idCar));
-        if (document.querySelectorAll(".message")[0] !== undefined) {
-          document.querySelectorAll(".message")[0].classList.add("message-visible");
-        }
+        // if (document.querySelectorAll(".message")[0] !== undefined) {
+        //   document.querySelectorAll(".message")[0].classList.add("message-visible");
+        // }
       }
     });
   }

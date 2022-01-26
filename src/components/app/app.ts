@@ -5,6 +5,7 @@ import { CarType } from "../types/car";
 class App {
   constructor() {
     this.runApp();
+    localStorage.setItem("idCar", "0");
   }
   runApp() {
     fetch("http://127.0.0.1:3000/garage")

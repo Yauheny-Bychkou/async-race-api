@@ -75,9 +75,7 @@ class ControlGaragePage {
   addEventListenerForButtonReset(data: CarType[], minCar: number, maxCar: number) {
     this.buttonReset.addEventListener("click", () => {
       localStorage.setItem("idCar", "0");
-      document.querySelectorAll(".message").forEach((item) => {
-        item.remove();
-      });
+      document.querySelector(".message")!.remove();
       data.slice(minCar, maxCar).forEach((item: CarType) => {
         new CarAnimation().returnToStartPosition(item.id.toString());
         const buttonStart = document.querySelector(`.started-${item.id}`);

@@ -1,6 +1,7 @@
 import ControlGaragePage from "../../controller/controlGaragePage";
 import Navigation from "../../controller/navigation";
 import { CarType } from "../../types/car";
+import RequestWinners from "../winners/RequestWinners";
 
 class RequestGarage {
   async createCar(name: string, color: string) {
@@ -24,7 +25,9 @@ class RequestGarage {
   async deleteCar(id: string) {
     await fetch(`http://127.0.0.1:3000/garage/${id}`, {
       method: "DELETE",
-    }).then(() => this.getCars());
+    })
+      .then(() => this.getCars())
+      .then(() => new RequestWinners().deleteWinner(id));
   }
   async getCars() {
     await fetch("http://127.0.0.1:3000/garage")

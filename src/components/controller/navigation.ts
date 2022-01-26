@@ -2,6 +2,7 @@ import GaragePage from "../pages/garage-page";
 import WinnerPage from "../pages/winner-page";
 import { CarType } from "../types/car";
 import { WinnerType } from "../types/winners";
+import ControlWinnersPage from "./conrolWinnersPage";
 import ControlGaragePage from "./controlGaragePage";
 
 class Navigation {
@@ -48,7 +49,9 @@ class Navigation {
         });
     });
   }
-  addListenersToWinnersButton(minCar = 0, maxCar = 10) {
+  addListenersToWinnersButton() {
+    const minCar = localStorage.getItem("minCarWin") ? JSON.parse(localStorage.getItem("minCarWin") || "") : 0;
+    const maxCar = localStorage.getItem("maxCarWin") ? JSON.parse(localStorage.getItem("maxCarWin") || "") : 10;
     this.winnersButton.addEventListener("click", () => {
       fetch(`http://127.0.0.1:3000/winners?_page=1&_limit=10&_sort=ASC&_order=time`, {
         method: "GET",
@@ -57,6 +60,7 @@ class Navigation {
         .then((data: WinnerType[]) => {
           this.wrapperForPage.lastChild?.remove();
           this.wrapperForPage.append(new WinnerPage().renderPage(data, minCar, maxCar));
+          new ControlWinnersPage();
         });
     });
   }

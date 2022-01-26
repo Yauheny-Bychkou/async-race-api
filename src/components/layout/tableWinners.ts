@@ -32,6 +32,7 @@ class TableWinners {
     return this.wrapperHeadTable;
   }
   addBodyTable(data: WinnerType[], minWinner: number, maxWinner: number) {
+    this.wrapperBodyTable.classList.add("body-table");
     data
       .slice(minWinner, maxWinner)
       .forEach((item: WinnerType) => this.wrapperBodyTable.append(new RowTableWinners().addRowTable(item)));

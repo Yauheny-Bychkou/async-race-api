@@ -11,6 +11,9 @@ class WinnerPage {
   private wrapperButtonPagination = document.createElement("div");
 
   renderPage(data: WinnerType[], minWinner: number, maxWinner: number) {
+    if (document.querySelector(".message") !== null) {
+      document.querySelector(".message")!.remove();
+    }
     this.element.append(
       this.addTitleWinners(data.length),
       this.addTitlePage(),
@@ -34,6 +37,7 @@ class WinnerPage {
     return this.wrapperForTableWinners;
   }
   addButtonsPagination(count: number) {
+    this.wrapperButtonPagination.classList.add("buttons-win-pagination");
     this.wrapperButtonPagination.append(
       new ButtonPaginationWinners().addButtonPrev(),
       new ButtonPaginationWinners().addButtonNext(count)

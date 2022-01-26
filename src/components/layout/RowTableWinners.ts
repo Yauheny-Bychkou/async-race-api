@@ -21,22 +21,10 @@ class RowTableWinners {
         this.countWinner.innerText = item.wins.toString();
         this.wrapperCarWinner.insertAdjacentHTML("beforeend", new ImageCarWinner().createCarTemplate(data.color));
         this.wrapperRowTable.classList.add("flex-car");
-        if (item.id.toString().length === 1) {
-          if (data.name.split(" ").length === 1) {
-            this.nameWinner.style.marginRight = "75px";
-          }
-          if (data.name.split(" ").length === 2) {
-            this.nameWinner.style.marginRight = "35px";
-          }
-          this.countWinner.style.marginRight = "80px";
-          this.numberWinner.style.marginRight = "78px";
-          this.wrapperCarWinner.style.marginRight = "10px";
-        } else if (item.id.toString().length === 3) {
-          this.numberWinner.style.marginRight = "60px";
-          this.nameWinner.style.marginRight = "30px";
-          this.wrapperCarWinner.style.marginRight = "10px";
-          this.countWinner.style.marginRight = "80px";
-        }
+        this.numberWinner.style.marginRight = "80px";
+        this.wrapperCarWinner.style.marginRight = "10px";
+        this.countWinner.style.marginRight = "60px";
+        this.nameWinner.style.marginRight = "60px";
         this.wrapperRowTable.style.paddingLeft = "10px";
         this.wrapperRowTable.classList.add("row-table");
         this.wrapperRowTable.append(

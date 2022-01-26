@@ -164,7 +164,6 @@ class ControlGaragePage {
         this.minCar = +this.minCar + MAX_NUMBER_CAR;
         this.maxCar = +this.maxCar + MAX_NUMBER_CAR;
         this.count = +this.count + START_COUNT;
-
         if (+this.count > START_COUNT) {
           this.buttonPrev.removeAttribute("disabled");
         }

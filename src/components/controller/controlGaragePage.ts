@@ -45,9 +45,22 @@ class ControlGaragePage {
     this.addEventListenerForWrapperCar();
     this.addEventListenerForButtonGenerate();
     this.addEventListenerForButtonsPagination(data);
-    this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
+    // this.addEventListenerForButtonRace(data, this.minCar, this.maxCar);
     this.addEventListenerForInputNameCreate();
     this.addEventListenerForInputColorCreate();
+    this.buttonRace.addEventListener("click", () => {
+      const minCar = localStorage.getItem("minCar") ? JSON.parse(localStorage.getItem("minCar") || "0") : "0";
+      const maxCar = localStorage.getItem("maxCar") ? JSON.parse(localStorage.getItem("maxCar") || "7") : "7";
+      localStorage.setItem("idCar", "0");
+      data.slice(+minCar, +maxCar).forEach((item: CarType) => {
+        new RequestEngine().startEngine(item.id.toString());
+        const buttonStart = document.querySelector(`.started-${item.id}`);
+        const buttonStop = document.querySelector(`.stopped-${item.id}`);
+        buttonStart?.setAttribute("disabled", "");
+        buttonStop?.removeAttribute("disabled");
+      });
+      this.addEventListenerForButtonReset(data, +minCar, +maxCar);
+    });
   }
   addEventListenerForInputColorCreate() {
     this.inputColorCreate.addEventListener("change", () => {
@@ -59,23 +72,14 @@ class ControlGaragePage {
       localStorage.setItem("inputNameCreate", JSON.stringify(this.inputName.value));
     });
   }
-  addEventListenerForButtonRace(data: CarType[], minCar: number, maxCar: number) {
-    this.buttonRace.addEventListener("click", () => {
-      localStorage.setItem("idCar", "0");
-      data.slice(minCar, maxCar).forEach((item: CarType, i) => {
-        new RequestEngine().startEngine(item.id.toString());
-        const buttonStart = document.querySelector(`.started-${item.id}`);
-        const buttonStop = document.querySelector(`.stopped-${item.id}`);
-        buttonStart?.setAttribute("disabled", "");
-        buttonStop?.removeAttribute("disabled");
-      });
-      this.addEventListenerForButtonReset(data, minCar, maxCar);
-    });
-  }
+  // addEventListenerForButtonRace(data: CarType[], minCar: number, maxCar: number) {
+  // }
   addEventListenerForButtonReset(data: CarType[], minCar: number, maxCar: number) {
     this.buttonReset.addEventListener("click", () => {
       localStorage.setItem("idCar", "0");
-      document.querySelector(".message")!.remove();
+      if (document.querySelector(".message") !== null) {
+        document.querySelector(".message")!.remove();
+      }
       data.slice(minCar, maxCar).forEach((item: CarType) => {
         new CarAnimation().returnToStartPosition(item.id.toString());
         const buttonStart = document.querySelector(`.started-${item.id}`);
@@ -157,7 +161,7 @@ class ControlGaragePage {
         data
           .slice(+this.minCar, +this.maxCar)
           .forEach((item: CarType) => this.wrapperCars.append(new Car().addCar(item)));
-        this.addEventListenerForButtonRace(data, +this.minCar, +this.maxCar);
+        // this.addEventListenerForButtonRace(data, +this.minCar, +this.maxCar);
         localStorage.setItem("minCar", JSON.stringify(+this.minCar));
         localStorage.setItem("maxCar", JSON.stringify(+this.maxCar));
       } else if (isButtonNext) {
@@ -176,7 +180,7 @@ class ControlGaragePage {
         data
           .slice(+this.minCar, +this.maxCar)
           .forEach((item: CarType) => this.wrapperCars.append(new Car().addCar(item)));
-        this.addEventListenerForButtonRace(data, +this.minCar, +this.maxCar);
+        // this.addEventListenerForButtonRace(data, +this.minCar, +this.maxCar);
         localStorage.setItem("minCar", JSON.stringify(+this.minCar));
         localStorage.setItem("maxCar", JSON.stringify(+this.maxCar));
       }

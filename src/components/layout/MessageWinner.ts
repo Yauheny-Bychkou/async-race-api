@@ -9,7 +9,7 @@ class MessageWinner {
       .then((data: CarType) => {
         this.titleMessage.innerText = `${data.name} went first(${time}s)`;
         this.wrapperMessage.append(this.titleMessage);
-        this.wrapperMessage.classList.add("message", `message-${id}`);
+        this.wrapperMessage.classList.add("message");
       });
     return this.wrapperMessage;
   }

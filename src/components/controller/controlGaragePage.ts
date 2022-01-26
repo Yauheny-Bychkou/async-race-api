@@ -146,6 +146,9 @@ class ControlGaragePage {
       const isButtonPrev = (<HTMLElement>event.target).classList.contains("prev");
       const isButtonNext = (<HTMLElement>event.target).classList.contains("next");
       if (isButtonPrev) {
+        if (document.querySelector(".message") !== null) {
+          document.querySelector(".message")!.remove();
+        }
         this.minCar = +this.minCar - MAX_NUMBER_CAR;
         this.maxCar = +this.maxCar - MAX_NUMBER_CAR;
         this.count = +this.count - START_COUNT;
@@ -165,6 +168,9 @@ class ControlGaragePage {
         localStorage.setItem("minCar", JSON.stringify(+this.minCar));
         localStorage.setItem("maxCar", JSON.stringify(+this.maxCar));
       } else if (isButtonNext) {
+        if (document.querySelector(".message") !== null) {
+          document.querySelector(".message")!.remove();
+        }
         this.minCar = +this.minCar + MAX_NUMBER_CAR;
         this.maxCar = +this.maxCar + MAX_NUMBER_CAR;
         this.count = +this.count + START_COUNT;

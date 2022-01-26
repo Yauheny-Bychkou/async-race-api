@@ -53,6 +53,9 @@ class Navigation {
     const minCar = localStorage.getItem("minCarWin") ? JSON.parse(localStorage.getItem("minCarWin") || "") : 0;
     const maxCar = localStorage.getItem("maxCarWin") ? JSON.parse(localStorage.getItem("maxCarWin") || "") : 10;
     this.winnersButton.addEventListener("click", () => {
+      if (document.querySelector(".message") !== null) {
+        document.querySelector(".message")!.remove();
+      }
       fetch(`http://127.0.0.1:3000/winners?_page=1&_limit=10&_sort=ASC&_order=time`, {
         method: "GET",
       })

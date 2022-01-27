@@ -66,3 +66,22 @@ body {
 .message-visible {
    display: initial !important; 
 }
+.flag {
+    position: absolute;
+    left: 90%;
+}
+@media (max-width: 1300px) {
+  .flag {
+    left: 85%;
+}
+}
+@media (max-width: 780px) {
+  .flag {
+    left: 80%;
+}
+}
+@media (max-width: 600px) {
+  .flag {
+    left: 75%;
+}
+}

@@ -4,6 +4,7 @@ import { CarType } from "../types/car";
 class Car {
   private wrapper = document.createElement("div");
   private wrapperForButtons = document.createElement("div");
+  private wrapperForFlag = document.createElement("div");
   private buttonSelect = document.createElement("button");
   private buttonRemove = document.createElement("button");
   private nameCar = document.createElement("span");
@@ -39,11 +40,14 @@ class Car {
     this.wrapperForCar.classList.add("flex-car");
     this.overlayForCar.classList.add("overlay-car");
     this.wrapperForImageCar.insertAdjacentHTML("beforeend", new ImageCar().createCarTemplate(item.color));
+    this.wrapperForFlag.classList.add("flag");
+    this.wrapperForFlag.insertAdjacentHTML("beforeend", new ImageCar().createFinishFlag());
     this.wrapperForImageCar.style.position = "relative";
     this.wrapperForImageCar.style.left = "0%";
     this.wrapperForImageCar.append(this.overlayForCar);
     this.wrapperForImageCar.classList.add(`wrapper-image`, `wrapper-image-${item.id}`);
-    this.wrapperForCar.append(this.startCarButton, this.stopCarButton, this.wrapperForImageCar);
+    this.wrapperForCar.style.position = "relative";
+    this.wrapperForCar.append(this.startCarButton, this.stopCarButton, this.wrapperForImageCar, this.wrapperForFlag);
     return this.wrapperForCar;
   }
 }

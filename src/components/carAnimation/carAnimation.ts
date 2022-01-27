@@ -3,19 +3,21 @@ class CarAnimation {
     const time = Math.floor(distance / velocity / 700);
     if (document.querySelector(`.wrapper-image-${id}`) !== null) {
       const wrapperCar: HTMLElement = document.querySelector(`.wrapper-image-${id}`)!;
-      console.log(document.documentElement.clientWidth);
-      if (document.documentElement.clientWidth > 1300) {
-        wrapperCar.style.left = "90%";
-      }
-      if (document.documentElement.clientWidth < 1300) {
-        wrapperCar.style.left = "85%";
-      }
-      if (document.documentElement.clientWidth < 780) {
-        wrapperCar.style.left = "80%";
-      }
-      if (document.documentElement.clientWidth < 600) {
-        wrapperCar.style.left = "75%";
-      }
+      // console.log(document.documentElement.clientWidth);
+      // if (document.documentElement.clientWidth > 1300) {
+      //   wrapperCar.style.left = "90%";
+      // }
+      // if (document.documentElement.clientWidth < 1300) {
+      //   wrapperCar.style.left = "85%";
+      // }
+      // if (document.documentElement.clientWidth < 780) {
+      //   wrapperCar.style.left = "80%";
+      // }
+      // if (document.documentElement.clientWidth < 600) {
+      //   wrapperCar.style.left = "75%";
+      // }
+      // wrapperCar.style.transition = `${time}s ease`;
+      wrapperCar.style.left = "90%";
       wrapperCar.style.transition = `${time}s ease`;
     }
   }
